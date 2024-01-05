@@ -1,6 +1,7 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
+// Set the number of characters in the password
 function getCharCount() { 
   var charCount = prompt("Enter a number between 8 and 128 to set password character count:");
   while (charCount) {
@@ -17,7 +18,8 @@ function getCharCount() {
         };
   };
 };
-  
+
+// Determine if password will contain lowercase characters
 function getLowerChar() {
   var passwordAlphabet = "abcdefghijklmnopqrstuvwxyz";
   var lowerChar = confirm("Include lowercase characters?");
@@ -29,6 +31,7 @@ function getLowerChar() {
     };
 };
 
+// Determine if password will contain lowercase letters
 function getUpperCase() {
   var passwordUpper = "abcdefghijklmnopqrstuvwxyz".toUpperCase();
   var upperChar = confirm("Include uppercase characters?");
@@ -40,6 +43,7 @@ function getUpperCase() {
     };
 };
 
+// Determine if password will contain numerical characters
 function getNumericChar() {
   var passwordDigits = "1234567890";
   var numericChar = confirm("Include numerical characters?");
@@ -51,6 +55,7 @@ function getNumericChar() {
     };
 };
 
+// Determine if password will contain special characters
 function getSpecialChar() {
   var passwordSpecial = "`!@#$%^&*()-_";
   var specialChar = confirm("Include special characters?");
@@ -62,24 +67,33 @@ function getSpecialChar() {
     };
 };
 
+// Generate the password
 function generatePassword() {
-  charCount = getCharCount();
-  lowerChar = getLowerChar();
-  upperChar = getUpperCase();
-  numericChar = getNumericChar();
-  specialChar = getSpecialChar();
+    charCount = getCharCount();
+    
+    // Check for which characters to include in the password
+    function getPasswordChar () {
+      lowerChar = getLowerChar();
+      upperChar = getUpperCase();
+      numericChar = getNumericChar();
+      specialChar = getSpecialChar();
+      var passwordChar = lowerChar + upperChar + numericChar + specialChar;
+      // Send user back to character selection if no options are selected
+      while (!passwordChar == true) {
+        alert("No characters selected!");
+        generatePassword();
+          }
+      };
 
-  const passwordGenerator = (length=charCount) => {
-    var string = "";
-    const passwordChar = lowerChar + upperChar + numericChar + specialChar;
-    var count = 0;
-    while (count < length) {
-      var randomChar = Math.floor(Math.random() * characters.length);
-      string = string + passwordChar[randomChar];
-      count ++;
-    };
-    return string;
+  // Password code sourced from: https://dev.to/code_mystery/random-password-generator-using-javascript-6a
+  var password = "";
+
+  for (var i = 0; i <= charCount; i++) {
+    var randomNumber = Math.floor(Math.random() * passwordChar.length);
+    password += passwordChar.substring(randomNumber, randomNumber +1);
   };
+    document.getElementById("password").value = password;
+    return password;
 };
 
 // Write password to the #password input
