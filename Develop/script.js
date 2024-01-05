@@ -68,27 +68,25 @@ function generatePassword() {
   upperChar = getUpperCase();
   numericChar = getNumericChar();
   specialChar = getSpecialChar();
+  var passwordChar = lowerChar + upperChar + numericChar + specialChar;
+  var password = "";
 
-  const passwordGenerator = (length=charCount) => {
-    var string = "";
-    const passwordChar = lowerChar + upperChar + numericChar + specialChar;
-    var count = 0;
-    while (count < length) {
-      var randomChar = Math.floor(Math.random() * characters.length);
-      string = string + passwordChar[randomChar];
-      count ++;
-    };
-    return string;
+  for (var i = 0; i <= charCount; i++) {
+    var randomNumber = Math.floor(Math.random() * passwordChar.length);
+    password += passwordChar.substring(randomNumber, randomNumber +1);
   };
+    document.getElementById("password").value = password;
+    return password;
 };
 
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();
+  password = generatePassword();
   var passwordText = document.querySelector("#password");
    
-  passwordText.attributes = passwordText;
+  passwordText.value = passwordText;
 };
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+console.log(password);
