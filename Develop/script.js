@@ -81,12 +81,11 @@ function generatePassword() {
 
 // Write password to the #password input
 function writePassword() {
-  password = generatePassword(); // function works correctly
+  password = generatePassword();
   var passwordText = document.querySelector("#password");
    
-  passwordText.value = passwordText;
+  passwordText.value = password;
 };
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
-// after button click all functions work correctly, but the value in password is not passed to the HTML element returning: "[object HTMLTextAreaElement]"
